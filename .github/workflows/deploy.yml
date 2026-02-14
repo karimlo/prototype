@@ -109,42 +109,12 @@ jobs:
           rm -rf "gh-pages/$SAFE_NAME"
           cp -r source/dist "gh-pages/$SAFE_NAME"
 
-      # ── 6. Regenerate the index page ──
-      - name: Generate index page
-        if: steps.info.outputs.skip != 'true'
-        run: |
-          # Find all prototype subdirectories (exclude hidden dirs and files)
-          PROTOTYPES=""
-          for dir in gh-pages/*/; do
-            [ -d "$dir" ] || continue
-            name=$(basename "$dir")
-            # Skip hidden directories
-            case "$name" in .*) continue ;; esac
-            PROTOTYPES="$PROTOTYPES $name"
-          done
-          echo "Found prototypes:$PROTOTYPES"
-
-          # Use the generate-index.cjs script from main (or source if available)
-          if [ -f "source/scripts/generate-index.cjs" ]; then
-            node source/scripts/generate-index.cjs gh-pages/index.html $PROTOTYPES
-          else
-            # Fallback: fetch script from main
-            git clone --depth 1 --branch main \
-              https://github.com/${{ github.repository }}.git main-ref 2>/dev/null || true
-            if [ -f "main-ref/scripts/generate-index.cjs" ]; then
-              node main-ref/scripts/generate-index.cjs gh-pages/index.html $PROTOTYPES
-            else
-              echo "<html><body><h1>Prototypes</h1><p>No index generator found.</p></body></html>" \
-                > gh-pages/index.html
-            fi
-          fi
-
-      # ── 7. Ensure .nojekyll exists (prevents GitHub from processing with Jekyll) ──
+      # ── 6. Ensure .nojekyll exists (prevents GitHub from processing with Jekyll) ──
       - name: Add .nojekyll
         if: steps.info.outputs.skip != 'true'
         run: touch gh-pages/.nojekyll
 
-      # ── 8. Commit and push to gh-pages ──
+      # ── 7. Commit and push to gh-pages ──
       - name: Deploy to gh-pages
         if: steps.info.outputs.skip != 'true'
         working-directory: gh-pages
@@ -158,10 +128,21 @@ jobs:
             BRANCH="${{ steps.info.outputs.branch }}"
             if [ "${{ steps.info.outputs.is_delete }}" = "true" ]; then
               git commit -m "Remove deployment for deleted branch: $BRANCH"
-            elif [ "${{ steps.info.outputs.is_main }}" = "true" ]; then
-              git commit -m "Update index page"
             else
               git commit -m "Deploy prototype: $BRANCH"
             fi
             git push
           fi
+
+      # ── 8. Trigger the index page rebuild in prototypes-index repo ──
+      - name: Trigger index rebuild
+        if: steps.info.outputs.skip != 'true'
+        env:
+          INDEX_PAT: ${{ secrets.INDEX_REPO_PAT }}
+        run: |
+          curl -s -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token $INDEX_PAT" \
+            https://api.github.com/repos/karimlo/prototypes-index/dispatches \
+            -d "{\"event_type\":\"prototype-deployed\"}"
+          echo "Triggered index rebuild in prototypes-index repo"
