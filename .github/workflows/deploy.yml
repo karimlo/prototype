@@ -124,15 +124,15 @@ jobs:
           done
           echo "Found prototypes:$PROTOTYPES"
 
-          # Use the generate-index.js script from main (or source if available)
-          if [ -f "source/scripts/generate-index.js" ]; then
-            node source/scripts/generate-index.js gh-pages/index.html $PROTOTYPES
+          # Use the generate-index.cjs script from main (or source if available)
+          if [ -f "source/scripts/generate-index.cjs" ]; then
+            node source/scripts/generate-index.cjs gh-pages/index.html $PROTOTYPES
           else
             # Fallback: fetch script from main
             git clone --depth 1 --branch main \
               https://github.com/${{ github.repository }}.git main-ref 2>/dev/null || true
-            if [ -f "main-ref/scripts/generate-index.js" ]; then
-              node main-ref/scripts/generate-index.js gh-pages/index.html $PROTOTYPES
+            if [ -f "main-ref/scripts/generate-index.cjs" ]; then
+              node main-ref/scripts/generate-index.cjs gh-pages/index.html $PROTOTYPES
             else
               echo "<html><body><h1>Prototypes</h1><p>No index generator found.</p></body></html>" \
                 > gh-pages/index.html
