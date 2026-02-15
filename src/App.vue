@@ -1,352 +1,72 @@
 <script setup>
-const navLinks = [
-  { label: 'Prototypes', href: '/', external: false },
-  { label: 'Documentation', href: 'https://karimlounes.atlassian.net/wiki/spaces/SD/pages/491523/Documentation', external: true },
-  { label: 'About Me', href: 'https://karimlounes.atlassian.net/wiki/spaces/SD/pages/786433/About+Me', external: true }
-]
+import { ref } from 'vue'
+import TopNavBar from './components/TopNavBar.vue'
+import LeftNav from './components/LeftNav.vue'
+import PageHeader from './components/PageHeader.vue'
 
-const prototypes = [
-  {
-    name: 'Main Prototype',
-    description: 'The primary UX AI prototype with navigation, layout components, and design system.',
-    href: 'https://karimlo.github.io/prototype/',
-    icon: '🎨'
-  },
-  {
-    name: 'Test Prototype 1',
-    description: 'Experimental prototype branch for testing new component ideas.',
-    href: 'https://karimlo.github.io/prototype/test-prototype-1/',
-    icon: '🧪'
-  }
-]
+const sidebarExpanded = ref(false)
 </script>
 
 <template>
-  <div class="app-wrapper">
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="/" class="nav-brand">My UX AI</a>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Top Navigation -->
+    <TopNavBar />
 
-      <!-- Mobile hamburger -->
-      <button
-        class="nav-toggle"
-        aria-label="Toggle navigation"
-        onclick="this.closest('.navbar').classList.toggle('menu-open')"
-      >
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
+    <!-- Left Navigation -->
+    <LeftNav @update:expanded="sidebarExpanded = $event" />
 
-      <!-- Navigation links -->
-      <ul class="nav-links">
-        <li v-for="link in navLinks" :key="link.label">
-          <a
-            :href="link.href"
-            :target="link.external ? '_blank' : '_self'"
-            :rel="link.external ? 'noopener noreferrer' : undefined"
-            class="nav-link"
-          >
-            {{ link.label }}
-            <span v-if="link.external" class="external-icon" aria-hidden="true">↗</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <!-- Main Content Area -->
+    <main
+      class="pt-14 transition-all duration-300 ease-in-out"
+      :class="sidebarExpanded ? 'pl-52' : 'pl-16'"
+    >
+      <!-- Page Header -->
+      <PageHeader
+        title="Dashboard"
+        subtitle="Welcome back! Here's what's happening with your prototypes today."
+      />
 
-  <!-- Main content area -->
-  <main class="main-content">
-    <!-- Hero - top aligned -->
-    <div class="hero">
-      <h1>Welcome to <span class="brand-highlight">My UX AI</span></h1>
-      <p class="hero-subtitle">A prototyping platform for exploring and sharing UX design concepts.</p>
-    </div>
-
-    <!-- Prototypes grid -->
-    <section class="prototypes-section">
-      <p class="prototypes-count">{{ prototypes.length }} prototype{{ prototypes.length !== 1 ? 's' : '' }} available</p>
-      <div class="prototypes-grid">
-        <a
-          v-for="proto in prototypes"
-          :key="proto.name"
-          :href="proto.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="prototype-card"
-        >
-          <span class="card-icon">{{ proto.icon }}</span>
-          <div class="card-body">
-            <h2 class="card-title">{{ proto.name }}</h2>
-            <p class="card-description">{{ proto.description }}</p>
-            <span class="card-cta">View prototype →</span>
+      <!-- Page Body / Content -->
+      <div class="px-6 pb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Example placeholder cards -->
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold text-gray-900">Components</h3>
+            </div>
+            <p class="text-sm text-gray-500 leading-relaxed">Reusable UI components built for rapid prototyping.</p>
           </div>
-        </a>
+
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold text-gray-900">Status</h3>
+            </div>
+            <p class="text-sm text-gray-500 leading-relaxed">All systems running. Last deployed successfully.</p>
+          </div>
+
+          <div class="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold text-gray-900">Recent Activity</h3>
+            </div>
+            <p class="text-sm text-gray-500 leading-relaxed">Track the latest changes and updates here.</p>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+    </main>
   </div>
 </template>
-
-<style scoped>
-/* Navigation Bar */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  z-index: 1000;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
-}
-
-.nav-brand {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #4f46e5;
-  text-decoration: none;
-  letter-spacing: -0.02em;
-}
-
-.nav-brand:hover {
-  color: #4338ca;
-}
-
-.nav-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: #4b5563;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.5rem 0;
-  position: relative;
-  transition: color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.nav-link:hover {
-  color: #4f46e5;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #4f46e5;
-  border-radius: 1px;
-  transition: width 0.2s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-.external-icon {
-  font-size: 0.75rem;
-  opacity: 0.6;
-}
-
-/* Mobile toggle button */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.hamburger-line {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background-color: #374151;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Main Content */
-.main-content {
-  margin-top: 60px;
-  min-height: calc(100vh - 60px);
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1.5rem;
-}
-
-.hero {
-  text-align: center;
-  padding: 3rem 1rem 2rem;
-}
-
-.hero h1 {
-  font-size: 2.4rem;
-  color: #111827;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.brand-highlight {
-  color: #4f46e5;
-}
-
-.hero-subtitle {
-  font-size: 1.1rem;
-  color: #6b7280;
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* Prototypes Section */
-.prototypes-section {
-  padding: 1rem 0 3rem;
-}
-
-.prototypes-count {
-  color: #64748b;
-  font-size: 0.9rem;
-  margin-bottom: 1.25rem;
-}
-
-.prototypes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
-}
-
-.prototype-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.prototype-card:hover {
-  border-color: #4f46e5;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
-  transform: translateY(-2px);
-}
-
-.card-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.card-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.card-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0 0 0.35rem;
-}
-
-.card-description {
-  font-size: 0.875rem;
-  color: #64748b;
-  line-height: 1.5;
-  margin: 0 0 0.75rem;
-}
-
-.card-cta {
-  font-size: 0.85rem;
-  color: #4f46e5;
-  font-weight: 500;
-}
-
-.prototype-card:hover .card-cta {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-    padding: 0.75rem 1.5rem;
-    gap: 0;
-  }
-
-  .menu-open .nav-links {
-    display: flex;
-  }
-
-  .nav-link {
-    padding: 0.75rem 0;
-    width: 100%;
-  }
-
-  .nav-link::after {
-    display: none;
-  }
-
-  .hero {
-    padding: 2rem 0.5rem 1.5rem;
-  }
-
-  .hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .prototypes-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
