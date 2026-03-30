@@ -76,7 +76,7 @@ async function handleLogin() {
         :style="{ backgroundImage: `url(${slide})`, opacity: i === currentSlide ? 1 : 0 }"
       />
       <!-- Frosted glass overlay on top of slides -->
-      <div class="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
     </template>
 
     <!-- ── Mobile dark mode: single static background ── -->
@@ -179,7 +179,7 @@ async function handleLogin() {
 .slide-layer {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: auto 100%;
   background-position: top center;
   background-repeat: no-repeat;
   /* Cross-fade transition — matches the 5 s interval comfortably */
