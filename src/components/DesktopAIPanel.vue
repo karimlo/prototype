@@ -204,9 +204,8 @@ function startResize(e) {
             : 'border-gray-200 dark:border-gray-700'"
         />
 
-        <!-- Mic button — only shown when SpeechRecognition is available -->
+        <!-- Mic button -->
         <button
-          v-if="voiceSupported"
           @click="toggleVoice()"
           :title="isListening ? 'Stop listening' : 'Voice input'"
           class="w-9 h-9 flex items-center justify-center rounded-full shrink-0 transition-all duration-200"

@@ -50,8 +50,9 @@ const { isOpen: desktopChatOpen, panelWidth, toggle: toggleDesktopChat } = useDe
       <!-- Desktop AI Panel (fixed right panel, desktop only) -->
       <DesktopAIPanel />
 
-      <!-- Desktop floating AI button — bottom-right, hidden on mobile -->
+      <!-- Desktop floating AI button — bottom-right, hidden on mobile, hidden when panel is open -->
       <button
+        v-if="!desktopChatOpen"
         @click="toggleDesktopChat()"
         class="hidden md:flex fixed bottom-6 right-6 z-50
           w-14 h-14 items-center justify-center rounded-2xl
