@@ -10,7 +10,7 @@ const holdings = [
 <template>
   <div class="bg-gray-50 dark:bg-gray-950 min-h-screen transition-colors duration-300 px-4 md:px-8 py-8">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Investments</h1>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Track Your Investments</h1>
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Your portfolio performance and holdings.</p>
 
       <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-6 mb-6 text-white">

@@ -32,7 +32,7 @@ onUnmounted(() => {
 <template>
   <div class="bg-gray-50 dark:bg-gray-950 min-h-screen transition-colors duration-300 px-4 md:px-8 py-8">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Expenses</h1>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Track Your Spending</h1>
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Monthly spending breakdown and budgets.</p>
 
       <div class="bg-gradient-to-br from-rose-500 to-pink-700 rounded-2xl p-6 mb-6 text-white">
