@@ -73,10 +73,10 @@ async function handleLogin() {
 
           <!-- Register / Forgot password row -->
           <div class="flex justify-between">
-            <button type="button" class="text-xs text-white/50 hover:text-white/80 transition-colors duration-200 py-1">
+            <button type="button" class="text-xs text-scout hover:text-scout/80 transition-colors duration-200 py-1">
               Register
             </button>
-            <button type="button" class="text-xs text-white/50 hover:text-white/80 transition-colors duration-200 py-1">
+            <button type="button" class="text-xs text-scout hover:text-scout/80 transition-colors duration-200 py-1">
               Forgot password?
             </button>
           </div>
