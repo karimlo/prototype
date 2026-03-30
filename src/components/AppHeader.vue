@@ -1,11 +1,20 @@
 <script setup>
+import { useRouter } from 'vue-router'
 import { useTheme } from '../composables/useTheme.js'
+import { useAuth } from '../composables/useAuth.js'
 import logoBlack from '../assets/images/scountlogo-black.svg'
 import logoWhite from '../assets/images/scountlogo-white.svg'
 
 const { isDark, toggleTheme } = useTheme()
+const { logout } = useAuth()
+const router = useRouter()
 
 const emit = defineEmits(['toggle-menu'])
+
+function handleLogout() {
+  logout()
+  router.push('/login')
+}
 
 const navLinks = [
   { label: 'Accounts', to: '/accounts' },
@@ -60,6 +69,21 @@ const navLinks = [
         <!-- Moon icon -->
         <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      </button>
+
+      <!-- Logout -->
+      <button
+        @click="handleLogout"
+        class="w-9 h-9 flex items-center justify-center rounded-full
+          text-gray-500 dark:text-gray-400
+          hover:bg-gray-100 dark:hover:bg-gray-800
+          hover:text-rose-500 dark:hover:text-rose-400
+          transition-all duration-200"
+        aria-label="Log out"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
         </svg>
       </button>
 
