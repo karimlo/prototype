@@ -1,24 +1,30 @@
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import AppHeader from './components/AppHeader.vue'
 import MobileMenu from './components/MobileMenu.vue'
 import AppBottomNav from './components/AppBottomNav.vue'
 import AIChatBox from './components/AIChatBox.vue'
 
+const route = useRoute()
 const mobileMenuOpen = ref(false)
 const chatOpen = ref(false)
+
+const isLoginPage = () => route.meta.public === true
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-    <!-- Header -->
-    <AppHeader @toggle-menu="mobileMenuOpen = true" />
 
-    <!-- Mobile slide-in menu -->
-    <MobileMenu :open="mobileMenuOpen" @close="mobileMenuOpen = false" />
+    <template v-if="!isLoginPage()">
+      <!-- Header -->
+      <AppHeader @toggle-menu="mobileMenuOpen = true" />
+      <!-- Mobile slide-in menu -->
+      <MobileMenu :open="mobileMenuOpen" @close="mobileMenuOpen = false" />
+    </template>
 
-    <!-- Main content — padded for header and mobile bottom nav -->
-    <main class="pt-16 pb-20 md:pb-0">
+    <!-- Main content -->
+    <main :class="!isLoginPage() ? 'pt-16 pb-20 md:pb-0' : ''">
       <router-view v-slot="{ Component }">
         <Transition name="page-fade" mode="out-in">
           <component :is="Component" />
@@ -26,11 +32,13 @@ const chatOpen = ref(false)
       </router-view>
     </main>
 
-    <!-- Mobile bottom nav -->
-    <AppBottomNav @open-chat="chatOpen = true" />
+    <template v-if="!isLoginPage()">
+      <!-- Mobile bottom nav -->
+      <AppBottomNav @open-chat="chatOpen = true" />
+      <!-- AI Chat box -->
+      <AIChatBox :open="chatOpen" @close="chatOpen = false" />
+    </template>
 
-    <!-- AI Chat box -->
-    <AIChatBox :open="chatOpen" @close="chatOpen = false" />
   </div>
 </template>
 
