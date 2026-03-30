@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
-import bgImage from '../assets/images/bg-1.jpg'
+import bgImage from '../assets/images/bg-2.jpg'
 
 const router = useRouter()
 const { login } = useAuth()
