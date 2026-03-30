@@ -7,6 +7,15 @@
     <title>SCOUT — Athlete Finance</title>
   </head>
   <body>
+    <!-- Runs before any JS bundle so dark class is set when useTheme.js initialises -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('scout-theme');
+        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

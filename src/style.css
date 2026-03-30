@@ -20,13 +20,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  /* Reset — inside @layer base so Tailwind utility layers always win */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
+  /* Tailwind v4 Preflight already resets margin/padding/box-sizing — no custom reset needed */
   html {
     scroll-behavior: smooth;
     min-width: 320px;
