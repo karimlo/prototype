@@ -19,12 +19,10 @@ function handleLogout() {
 }
 
 const navLinks = [
+  { label: 'Home', to: '/' },
   { label: 'Accounts', to: '/accounts' },
-  { label: 'Investments', to: '/investments' },
-  { label: 'Expenses', to: '/expenses' },
-  { label: 'Loans', to: '/loans' },
-  { label: 'Credit Cards', to: '/credit-cards' },
-  { label: 'Retirement', to: '/retirement' },
+  { label: 'Spending', to: '/spending' },
+  { label: 'Opportunities', to: '/more' },
 ]
 </script>
 

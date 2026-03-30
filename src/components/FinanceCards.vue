@@ -26,7 +26,7 @@ const cards = [
       <!-- Section header -->
       <div class="flex items-center justify-between mb-6">
         <div>
-          <h2 class="text-lg font-bold text-gray-900 dark:text-white">AI Recommendations</h2>
+          <h2 class="text-lg font-bold text-gray-900 dark:text-white">SCOUT AI Recommendations</h2>
           <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Personalized insights from your SCOUT AI</p>
         </div>
         <span class="text-xs font-medium px-3 py-1.5 rounded-full
