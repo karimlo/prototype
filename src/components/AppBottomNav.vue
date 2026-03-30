@@ -33,9 +33,10 @@ const navLinks = [
 </script>
 
 <template>
-  <nav class="fixed bottom-0 left-0 right-0 z-40 md:hidden
+  <nav class="fixed left-3 right-3 z-40 md:hidden floating-nav
     bg-white/95 dark:bg-gray-950/95 backdrop-blur-md
-    border-t border-gray-200 dark:border-gray-800
+    border border-gray-200 dark:border-gray-800
+    rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40
     transition-colors duration-300">
     <div class="flex items-stretch h-[4.25rem]">
       <!-- Nav links -->
@@ -78,3 +79,9 @@ const navLinks = [
   </nav>
 </template>
 
+<style scoped>
+/* Float above the browser chrome + device safe area (home indicator / gesture bar) */
+.floating-nav {
+  bottom: calc(env(safe-area-inset-bottom) + 0.75rem);
+}
+</style>

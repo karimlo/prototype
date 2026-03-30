@@ -31,7 +31,7 @@ const { isOpen: desktopChatOpen, panelWidth } = useDesktopChat()
 
     <!-- Main content — padding-right shifts content left when desktop panel is open -->
     <main
-      :class="!isLoginPage ? 'pt-16 pb-20 md:pb-0' : ''"
+      :class="!isLoginPage ? 'pt-16 pb-32 md:pb-0' : ''"
       :style="!isLoginPage && desktopChatOpen ? { paddingRight: panelWidth + 'px' } : {}"
       class="transition-[padding-right] duration-300"
     >
