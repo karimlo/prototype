@@ -7,11 +7,11 @@
     <title>SCOUT — Athlete Finance</title>
   </head>
   <body>
-    <!-- Runs before any JS bundle so dark class is set when useTheme.js initialises -->
+    <!-- Runs before any JS bundle so dark class is set when useTheme.js initialises.
+         Default is dark mode; only skip if the user has explicitly saved 'light'. -->
     <script>
       (function () {
-        var saved = localStorage.getItem('scout-theme');
-        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (localStorage.getItem('scout-theme') !== 'light') {
           document.documentElement.classList.add('dark');
         }
       })();

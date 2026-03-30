@@ -1,18 +1,25 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth.js'
+import { useTheme } from '../composables/useTheme.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
+import logoBlack from '../assets/images/scountlogo-black.svg'
 import bgMobile from '../assets/images/bg-3.jpg'
 import bgDesktop from '../assets/images/bp-desktop1.png'
 
 const router = useRouter()
 const { login } = useAuth()
+const { isDark } = useTheme()
 
 const email = ref('')
 const password = ref('')
 const error = ref('')
 const loading = ref(false)
+
+// Background images are only applied in dark mode
+const mobileBg  = computed(() => isDark.value ? `url(${bgMobile})`  : 'none')
+const desktopBg = computed(() => isDark.value ? `url(${bgDesktop})` : 'none')
 
 async function handleLogin() {
   error.value = ''
@@ -29,19 +36,32 @@ async function handleLogin() {
 </script>
 
 <template>
-  <div class="login-bg min-h-screen flex items-center justify-center px-5 relative">
-    <!-- Dark overlay — no blur so the image stays crisp -->
-    <div class="absolute inset-0 bg-black/30" />
+  <div
+    class="login-bg min-h-screen flex items-center justify-center px-5 relative transition-colors duration-300"
+    :class="isDark ? '' : 'bg-gray-50'"
+  >
+    <!-- Dark overlay — dark mode only, no blur so image stays crisp -->
+    <div v-if="isDark" class="absolute inset-0 bg-black/30" />
 
     <!-- Card -->
     <div class="relative z-10 w-full max-w-sm">
-      <!-- Logo -->
+
+      <!-- Logo: white in dark mode, black in light mode -->
       <div class="flex justify-center mb-8">
-        <img :src="logoWhite" alt="SCOUT" class="h-10 w-auto" />
+        <img :src="isDark ? logoWhite : logoBlack" alt="SCOUT" class="h-10 w-auto" />
       </div>
 
-      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl px-8 py-10 shadow-2xl">
-        <p class="text-sm text-white/60 text-center mb-8">Sign in to your SCOUT account</p>
+      <!-- Form card: frosted glass in dark / solid white in light -->
+      <div
+        class="rounded-3xl px-8 py-10"
+        :class="isDark
+          ? 'bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl'
+          : 'bg-white shadow-xl border border-gray-100'"
+      >
+        <p
+          class="text-sm text-center mb-8"
+          :class="isDark ? 'text-white/60' : 'text-gray-500'"
+        >Sign in to your SCOUT account</p>
 
         <form @submit.prevent="handleLogin" class="space-y-5">
           <!-- Email -->
@@ -50,10 +70,10 @@ async function handleLogin() {
             type="email"
             placeholder="Email address"
             autocomplete="email"
-            class="w-full px-5 py-4 rounded-xl text-sm leading-none
-              bg-white/10 border border-white/20 text-white placeholder-white/40
-              focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40
-              transition-all duration-200"
+            class="w-full px-5 py-4 rounded-xl text-sm leading-none focus:outline-none focus:ring-2 transition-all duration-200"
+            :class="isDark
+              ? 'bg-white/10 border border-white/20 text-white placeholder-white/40 focus:ring-white/40 focus:border-white/40'
+              : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-scout/40 focus:border-scout/40'"
           />
 
           <!-- Password -->
@@ -62,14 +82,14 @@ async function handleLogin() {
             type="password"
             placeholder="Password"
             autocomplete="current-password"
-            class="w-full px-5 py-4 rounded-xl text-sm leading-none
-              bg-white/10 border border-white/20 text-white placeholder-white/40
-              focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40
-              transition-all duration-200"
+            class="w-full px-5 py-4 rounded-xl text-sm leading-none focus:outline-none focus:ring-2 transition-all duration-200"
+            :class="isDark
+              ? 'bg-white/10 border border-white/20 text-white placeholder-white/40 focus:ring-white/40 focus:border-white/40'
+              : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-scout/40 focus:border-scout/40'"
           />
 
           <!-- Error -->
-          <p v-if="error" class="text-xs text-rose-300 text-center">{{ error }}</p>
+          <p v-if="error" class="text-xs text-rose-400 text-center">{{ error }}</p>
 
           <!-- Register / Forgot password row -->
           <div class="flex justify-between">
@@ -81,15 +101,14 @@ async function handleLogin() {
             </button>
           </div>
 
-          <!-- Submit -->
+          <!-- Submit: white button in dark / scout-gold button in light -->
           <button
             type="submit"
             :disabled="loading"
-            class="w-full px-6 py-4 rounded-xl font-semibold text-sm uppercase tracking-wide
-              bg-white text-gray-900
-              hover:bg-white/90 active:scale-[0.98]
-              disabled:opacity-60 disabled:cursor-not-allowed
-              transition-all duration-200 shadow-lg"
+            class="w-full px-6 py-4 rounded-xl font-semibold text-sm uppercase tracking-wide active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 shadow-lg"
+            :class="isDark
+              ? 'bg-white text-gray-900 hover:bg-white/90'
+              : 'bg-scout text-white hover:bg-scout/90'"
           >
             <span v-if="loading" class="flex items-center justify-center gap-2">
               <svg class="animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -102,7 +121,7 @@ async function handleLogin() {
           </button>
         </form>
 
-        <p class="text-center text-xs text-white/30 mt-10">
+        <p class="text-center text-xs mt-10" :class="isDark ? 'text-white/30' : 'text-gray-300'">
           SCOUT · Athlete Finance Platform
         </p>
       </div>
@@ -111,8 +130,9 @@ async function handleLogin() {
 </template>
 
 <style scoped>
+/* Background images only injected in dark mode (computed returns 'none' in light) */
 .login-bg {
-  background-image: v-bind("'url(' + bgMobile + ')'");
+  background-image: v-bind(mobileBg);
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -120,7 +140,7 @@ async function handleLogin() {
 
 @media (min-width: 768px) {
   .login-bg {
-    background-image: v-bind("'url(' + bgDesktop + ')'");
+    background-image: v-bind(desktopBg);
   }
 }
 </style>
