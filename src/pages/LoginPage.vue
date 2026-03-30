@@ -1,12 +1,14 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth.js'
 import { useTheme } from '../composables/useTheme.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
 import logoBlack from '../assets/images/scountlogo-black.svg'
 import bgMobile from '../assets/images/bg-3.jpg'
-import bgDesktop from '../assets/images/bp-desktop1.png'
+import bgSlide1 from '../assets/images/bp-desktop1.png'
+import bgSlide2 from '../assets/images/bp-desktop2.jpg'
+import bgSlide3 from '../assets/images/bp-desktop3.jpg'
 
 const router = useRouter()
 const { login } = useAuth()
@@ -17,30 +19,31 @@ const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
-// Track desktop breakpoint reactively so the correct bg image is always used.
-// Using matchMedia avoids the unreliable v-bind() inside @media scoped CSS.
+// Desktop slideshow
+const desktopSlides = [bgSlide1, bgSlide2, bgSlide3]
+const currentSlide = ref(0)
+
+// Responsive breakpoint
 const isDesktop = ref(false)
 let _mq = null
 let _mqHandler = null
+let _slideTimer = null
+
 onMounted(() => {
   _mq = window.matchMedia('(min-width: 768px)')
   isDesktop.value = _mq.matches
   _mqHandler = (e) => { isDesktop.value = e.matches }
   _mq.addEventListener('change', _mqHandler)
-})
-onUnmounted(() => {
-  if (_mq && _mqHandler) _mq.removeEventListener('change', _mqHandler)
+
+  // Cycle slides every 5 s
+  _slideTimer = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % desktopSlides.length
+  }, 5000)
 })
 
-// Background style — images only shown in dark mode
-const bgStyle = computed(() => {
-  if (!isDark.value) return {}
-  return {
-    backgroundImage: `url(${isDesktop.value ? bgDesktop : bgMobile})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'top',
-    backgroundRepeat: 'no-repeat',
-  }
+onUnmounted(() => {
+  if (_mq && _mqHandler) _mq.removeEventListener('change', _mqHandler)
+  if (_slideTimer) clearInterval(_slideTimer)
 })
 
 async function handleLogin() {
@@ -59,14 +62,33 @@ async function handleLogin() {
 
 <template>
   <div
-    class="min-h-screen flex items-center justify-center px-5 relative transition-colors duration-300"
+    class="min-h-screen flex items-center justify-center px-5 relative overflow-hidden"
     :class="isDark ? '' : 'bg-gray-50'"
-    :style="bgStyle"
   >
-    <!-- Dark overlay — dark mode only, no blur so image stays crisp -->
-    <div v-if="isDark" class="absolute inset-0 bg-black/30" />
 
-    <!-- Card -->
+    <!-- ── Desktop dark mode: crossfade slideshow ── -->
+    <template v-if="isDark && isDesktop">
+      <!-- Each slide is stacked; only the active one is opaque -->
+      <div
+        v-for="(slide, i) in desktopSlides"
+        :key="i"
+        class="slide-layer"
+        :style="{ backgroundImage: `url(${slide})`, opacity: i === currentSlide ? 1 : 0 }"
+      />
+      <!-- Frosted glass overlay on top of slides -->
+      <div class="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+    </template>
+
+    <!-- ── Mobile dark mode: single static background ── -->
+    <template v-else-if="isDark && !isDesktop">
+      <div
+        class="slide-layer"
+        :style="{ backgroundImage: `url(${bgMobile})`, opacity: 1 }"
+      />
+      <div class="absolute inset-0 bg-black/30" />
+    </template>
+
+    <!-- ── Card ── -->
     <div class="relative z-10 w-full max-w-sm">
 
       <!-- Logo: white in dark mode, black in light mode -->
@@ -151,5 +173,19 @@ async function handleLogin() {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Shared base for every slide layer */
+.slide-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  /* Cross-fade transition — matches the 5 s interval comfortably */
+  transition: opacity 1.5s ease-in-out;
+  will-change: opacity;
+}
+</style>
 
 
