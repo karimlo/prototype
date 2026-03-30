@@ -60,6 +60,20 @@ async function handleLogin() {
   loading.value = true
   await new Promise(r => setTimeout(r, 1000))
   loading.value = false
+
+  // Reset iOS Safari viewport zoom before navigating.
+  // Toggling the meta content forces the browser to re-apply initial-scale=1
+  // and zoom back out — without this, any zoom triggered by a focused input
+  // persists across the route transition.
+  const metaViewport = document.querySelector('meta[name=viewport]')
+  if (metaViewport) {
+    metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover'
+    // Briefly restore maximum-scale so we don't permanently block accessibility zoom
+    setTimeout(() => {
+      metaViewport.content = 'width=device-width, initial-scale=1.0, viewport-fit=cover'
+    }, 300)
+  }
+
   login()
   router.push('/')
 }
@@ -116,24 +130,26 @@ async function handleLogin() {
 
         <form @submit.prevent="handleLogin" class="space-y-5">
           <!-- Email -->
+          <!-- text-base (16px) prevents iOS Safari auto-zoom on input focus -->
           <input
             v-model="email"
             type="email"
             placeholder="Email address"
             autocomplete="email"
-            class="w-full px-5 py-4 rounded-xl text-sm leading-none focus:outline-none focus:ring-2 transition-all duration-200"
+            class="w-full px-5 py-4 rounded-xl text-base leading-none focus:outline-none focus:ring-2 transition-all duration-200"
             :class="isDark
               ? 'bg-white/10 border border-white/20 text-white placeholder-white/40 focus:ring-white/40 focus:border-white/40'
               : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-scout/40 focus:border-scout/40'"
           />
 
           <!-- Password -->
+          <!-- text-base (16px) prevents iOS Safari auto-zoom on input focus -->
           <input
             v-model="password"
             type="password"
             placeholder="Password"
             autocomplete="current-password"
-            class="w-full px-5 py-4 rounded-xl text-sm leading-none focus:outline-none focus:ring-2 transition-all duration-200"
+            class="w-full px-5 py-4 rounded-xl text-base leading-none focus:outline-none focus:ring-2 transition-all duration-200"
             :class="isDark
               ? 'bg-white/10 border border-white/20 text-white placeholder-white/40 focus:ring-white/40 focus:border-white/40'
               : 'bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-scout/40 focus:border-scout/40'"
