@@ -46,7 +46,7 @@ const navLinks = [
         class="text-sm font-medium text-gray-600 dark:text-gray-400
           hover:text-gray-900 dark:hover:text-white
           transition-colors duration-200
-          [&.router-link-active]:text-indigo-600 dark:[&.router-link-active]:text-indigo-400"
+          [&.router-link-active]:text-scout"
       >
         {{ link.label }}
       </router-link>

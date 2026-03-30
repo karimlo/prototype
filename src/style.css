@@ -7,6 +7,10 @@
 @import '@fontsource/inter/600.css';
 @import 'tailwindcss';
 
+@theme {
+  --color-scout: oklch(0.69 0.08 95.87);
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {

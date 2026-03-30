@@ -20,7 +20,7 @@ const cards = [
 </script>
 
 <template>
-  <section class="px-5 md:px-8 py-8">
+  <section class="px-6 md:px-10 py-8">
     <div class="max-w-5xl mx-auto">
 
       <!-- Section header -->
@@ -30,8 +30,8 @@ const cards = [
           <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Personalized insights from your SCOUT AI</p>
         </div>
         <span class="text-xs font-medium px-3 py-1.5 rounded-full
-          bg-teal-500/10 text-teal-700 dark:text-teal-400
-          border border-teal-500/20">
+          bg-scout/10 text-scout
+          border border-scout/20">
           {{ cards.length }} updates
         </span>
       </div>
@@ -65,9 +65,8 @@ const cards = [
             <!-- Badge -->
             <span class="text-[10px] font-semibold tracking-wide uppercase
               px-2.5 py-1 rounded-full
-              bg-teal-500/10 dark:bg-teal-400/10
-              text-teal-700 dark:text-teal-400
-              border border-teal-500/20 dark:border-teal-400/15">
+              bg-scout/10 text-scout
+              border border-scout/20">
               {{ card.badge }}
             </span>
           </div>
@@ -85,10 +84,10 @@ const cards = [
           <!-- Action button — proper padding so text never touches border -->
           <button class="self-start inline-flex items-center gap-2
             text-xs font-semibold
-            text-violet-600 dark:text-violet-400
-            bg-violet-500/10 dark:bg-violet-400/10
-            border border-violet-500/20 dark:border-violet-400/15
-            hover:bg-violet-500/20 dark:hover:bg-violet-400/20
+            text-scout
+            bg-scout/10
+            border border-scout/20
+            hover:bg-scout/20
             px-4 py-2 rounded-lg
             transition-all duration-200
             group-hover:gap-3">

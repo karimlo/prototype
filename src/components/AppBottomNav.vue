@@ -46,7 +46,7 @@ const navLinks = [
         class="flex-1 flex flex-col items-center justify-center gap-1 px-1 relative
           text-gray-400 dark:text-gray-500
           transition-all duration-300
-          [&.router-link-active]:text-indigo-600 dark:[&.router-link-active]:text-indigo-400"
+          [&.router-link-active]:text-scout"
       >
         <span v-html="link.icon" />
         <!-- Label slides in when active -->
@@ -57,7 +57,7 @@ const navLinks = [
         <!-- Active indicator dot -->
         <span
           v-if="route.path === link.to"
-          class="absolute top-1 w-1 h-1 rounded-full bg-indigo-500"
+          class="absolute top-1 w-1 h-1 rounded-full bg-scout"
         />
       </router-link>
 
@@ -66,7 +66,7 @@ const navLinks = [
         @click="emit('open-chat')"
         class="flex-1 flex flex-col items-center justify-center gap-1 px-1
           text-gray-400 dark:text-gray-500
-          hover:text-indigo-600 dark:hover:text-indigo-400
+          hover:text-scout
           transition-all duration-300"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
