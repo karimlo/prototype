@@ -95,21 +95,21 @@ const categories = [
           <!-- Category header -->
           <div
             class="p-4 flex items-center justify-between
-              bg-amber-400/15 dark:bg-black/70
-              backdrop-blur-md border-b border-amber-400/20 dark:border-white/10"
+              bg-transparent dark:bg-black/70
+              backdrop-blur-md border-b border-gray-200 dark:border-white/10"
             @click="cat.to && router.push(cat.to)"
             :style="cat.to ? 'cursor: pointer' : ''"
           >
             <div class="flex items-center gap-3">
-              <span v-html="cat.icon" class="text-amber-400" />
+              <span v-html="cat.icon" class="text-gray-900 dark:text-amber-400" />
               <div>
-                <p class="font-bold text-base leading-tight uppercase tracking-widest text-amber-400">{{ cat.label }}</p>
+                <p class="font-medium text-base leading-tight uppercase tracking-widest text-gray-900 dark:text-amber-400">{{ cat.label }}</p>
                 <p class="text-xs mt-0.5" :class="cat.subtitleClass">{{ cat.subtitle }}</p>
               </div>
             </div>
             <div class="text-right">
-              <p class="font-bold text-lg text-amber-400">{{ cat.total }}</p>
-              <span v-if="cat.to" class="text-amber-400/60 text-xs">View all →</span>
+              <p class="font-medium text-lg text-gray-900 dark:text-amber-400">{{ cat.total }}</p>
+              <span v-if="cat.to" class="text-gray-900/50 dark:text-amber-400/60 text-xs">View all →</span>
             </div>
           </div>
 
