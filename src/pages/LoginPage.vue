@@ -5,10 +5,13 @@ import { useAuth } from '../composables/useAuth.js'
 import { useTheme } from '../composables/useTheme.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
 import logoBlack from '../assets/images/scountlogo-black.svg'
-import bgMobile from '../assets/images/bg-3.jpg'
 import bgSlide1 from '../assets/images/bp-desktop1.png'
 import bgSlide2 from '../assets/images/bp-desktop2.jpg'
 import bgSlide3 from '../assets/images/bp-desktop3.jpg'
+import bgMobile1 from '../assets/images/bg-mobile1.jpg'
+import bgMobile2 from '../assets/images/bg-mobile2.jpg'
+import bgMobile3 from '../assets/images/bg-mobile3.jpg'
+import bgMobile4 from '../assets/images/bg-mobile4.jpg'
 
 const router = useRouter()
 const { login } = useAuth()
@@ -19,9 +22,10 @@ const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
-// Desktop slideshow
+// Slideshows — desktop (3 images) and mobile (4 images), same index drives both
 const desktopSlides = [bgSlide1, bgSlide2, bgSlide3]
-const currentSlide = ref(0)
+const mobileSlides  = [bgMobile1, bgMobile2, bgMobile3, bgMobile4]
+const currentSlide  = ref(0)
 
 // Responsive breakpoint
 const isDesktop = ref(false)
@@ -35,9 +39,10 @@ onMounted(() => {
   _mqHandler = (e) => { isDesktop.value = e.matches }
   _mq.addEventListener('change', _mqHandler)
 
-  // Cycle slides every 5 s
+  // Cycle every 5 s — wraps around whichever array is active
   _slideTimer = setInterval(() => {
-    currentSlide.value = (currentSlide.value + 1) % desktopSlides.length
+    const len = isDesktop.value ? desktopSlides.length : mobileSlides.length
+    currentSlide.value = (currentSlide.value + 1) % len
   }, 5000)
 })
 
@@ -68,22 +73,23 @@ async function handleLogin() {
 
     <!-- ── Desktop dark mode: crossfade slideshow ── -->
     <template v-if="isDark && isDesktop">
-      <!-- Each slide is stacked; only the active one is opaque -->
       <div
         v-for="(slide, i) in desktopSlides"
-        :key="i"
+        :key="`d-${i}`"
         class="slide-layer"
         :style="{ backgroundImage: `url(${slide})`, opacity: i === currentSlide ? 1 : 0 }"
       />
-      <!-- Frosted glass overlay on top of slides -->
-      <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
+      <!-- 30% dark overlay, no blur — keeps images crisp -->
+      <div class="absolute inset-0 bg-black/30" />
     </template>
 
-    <!-- ── Mobile dark mode: single static background ── -->
+    <!-- ── Mobile dark mode: crossfade slideshow (4 images) ── -->
     <template v-else-if="isDark && !isDesktop">
       <div
+        v-for="(slide, i) in mobileSlides"
+        :key="`m-${i}`"
         class="slide-layer"
-        :style="{ backgroundImage: `url(${bgMobile})`, opacity: 1 }"
+        :style="{ backgroundImage: `url(${slide})`, opacity: i === currentSlide ? 1 : 0 }"
       />
       <div class="absolute inset-0 bg-black/30" />
     </template>
