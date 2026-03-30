@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth.js'
 import { useTheme } from '../composables/useTheme.js'
@@ -17,9 +17,31 @@ const password = ref('')
 const error = ref('')
 const loading = ref(false)
 
-// Background images are only applied in dark mode
-const mobileBg  = computed(() => isDark.value ? `url(${bgMobile})`  : 'none')
-const desktopBg = computed(() => isDark.value ? `url(${bgDesktop})` : 'none')
+// Track desktop breakpoint reactively so the correct bg image is always used.
+// Using matchMedia avoids the unreliable v-bind() inside @media scoped CSS.
+const isDesktop = ref(false)
+let _mq = null
+let _mqHandler = null
+onMounted(() => {
+  _mq = window.matchMedia('(min-width: 768px)')
+  isDesktop.value = _mq.matches
+  _mqHandler = (e) => { isDesktop.value = e.matches }
+  _mq.addEventListener('change', _mqHandler)
+})
+onUnmounted(() => {
+  if (_mq && _mqHandler) _mq.removeEventListener('change', _mqHandler)
+})
+
+// Background style — images only shown in dark mode
+const bgStyle = computed(() => {
+  if (!isDark.value) return {}
+  return {
+    backgroundImage: `url(${isDesktop.value ? bgDesktop : bgMobile})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'top',
+    backgroundRepeat: 'no-repeat',
+  }
+})
 
 async function handleLogin() {
   error.value = ''
@@ -37,8 +59,9 @@ async function handleLogin() {
 
 <template>
   <div
-    class="login-bg min-h-screen flex items-center justify-center px-5 relative transition-colors duration-300"
+    class="min-h-screen flex items-center justify-center px-5 relative transition-colors duration-300"
     :class="isDark ? '' : 'bg-gray-50'"
+    :style="bgStyle"
   >
     <!-- Dark overlay — dark mode only, no blur so image stays crisp -->
     <div v-if="isDark" class="absolute inset-0 bg-black/30" />
@@ -129,18 +152,4 @@ async function handleLogin() {
   </div>
 </template>
 
-<style scoped>
-/* Background images only injected in dark mode (computed returns 'none' in light) */
-.login-bg {
-  background-image: v-bind(mobileBg);
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-}
 
-@media (min-width: 768px) {
-  .login-bg {
-    background-image: v-bind(desktopBg);
-  }
-}
-</style>
