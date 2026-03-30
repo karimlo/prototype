@@ -5,10 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/prototype/gh-scout/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SCOUT — Athlete Finance</title>
-    <script type="module" crossorigin src="/prototype/gh-scout/assets/index-BhXK6xie.js"></script>
-    <link rel="stylesheet" crossorigin href="/prototype/gh-scout/assets/index-CgVTE47u.css">
+    <script type="module" crossorigin src="/prototype/gh-scout/assets/index-DjM-xhwk.js"></script>
+    <link rel="stylesheet" crossorigin href="/prototype/gh-scout/assets/index-DNZwunk1.css">
   </head>
   <body>
+    <!-- Runs before any JS bundle so dark class is set when useTheme.js initialises -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem('scout-theme');
+        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <div id="app"></div>
   </body>
 </html>
