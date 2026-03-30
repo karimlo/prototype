@@ -1,8 +1,45 @@
 <script setup>
-import { ref, nextTick, watch } from 'vue'
+import { ref, nextTick, watch, onUnmounted } from 'vue'
 
 defineProps({ open: Boolean })
 const emit = defineEmits(['close'])
+
+// ─── Voice recognition ───────────────────────────────────────────────────────
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+const isListening = ref(false)
+let recognition = null
+
+function toggleVoice() {
+  if (!SpeechRecognition) return
+  if (isListening.value) {
+    recognition?.stop()
+    return
+  }
+  recognition = new SpeechRecognition()
+  recognition.lang = 'en-US'
+  recognition.interimResults = true
+  recognition.continuous = false
+
+  recognition.onstart = () => { isListening.value = true }
+
+  recognition.onresult = (event) => {
+    const transcript = Array.from(event.results)
+      .map(r => r[0].transcript)
+      .join('')
+    input.value = transcript
+    if (event.results[event.results.length - 1].isFinal) {
+      recognition.stop()
+      sendMessage()
+    }
+  }
+
+  recognition.onerror = () => { isListening.value = false }
+  recognition.onend  = () => { isListening.value = false }
+
+  recognition.start()
+}
+
+onUnmounted(() => { recognition?.stop() })
 
 const input = ref('')
 const messagesEl = ref(null)
@@ -120,11 +157,35 @@ watch(() => props => props.open, (val) => {
 
       <!-- Input -->
       <div class="px-4 pb-4 pt-2 flex items-center gap-2">
-        <input v-model="input" @keydown.enter="sendMessage()" type="text" placeholder="Ask anything about your finances..."
-          class="flex-1 px-4 py-2.5 rounded-full text-sm border border-gray-200 dark:border-gray-700
+        <input
+          v-model="input"
+          @keydown.enter="sendMessage()"
+          type="text"
+          :placeholder="isListening ? 'Listening…' : 'Ask anything about your finances...'"
+          class="flex-1 px-4 py-2.5 rounded-full text-sm border transition-all
             bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white
             placeholder-gray-400 dark:placeholder-gray-500
-            focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all" />
+            focus:outline-none focus:ring-2"
+          :class="isListening
+            ? 'border-rose-400 dark:border-rose-500 ring-2 ring-rose-400/30 focus:ring-rose-400/40'
+            : 'border-gray-200 dark:border-gray-700 focus:ring-indigo-500'"
+        />
+
+        <!-- Mic button -->
+        <button
+          @click="toggleVoice()"
+          :title="isListening ? 'Stop listening' : 'Voice input'"
+          class="w-9 h-9 flex items-center justify-center rounded-full shrink-0 transition-all duration-200"
+          :class="isListening
+            ? 'bg-rose-500 text-white shadow-md shadow-rose-500/40 animate-pulse'
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
+          </svg>
+        </button>
+
+        <!-- Send button -->
         <button @click="sendMessage()"
           class="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-700
             text-white transition-colors duration-200 shrink-0">
