@@ -8,10 +8,10 @@ import logoBlack from '../assets/images/scountlogo-black.svg'
 import bgSlide1 from '../assets/images/bp-desktop1.png'
 import bgSlide2 from '../assets/images/bp-desktop2.jpg'
 import bgSlide3 from '../assets/images/bp-desktop3.jpg'
-import bgMobile1 from '../assets/images/bg-mobile1.jpg'
-import bgMobile2 from '../assets/images/bg-mobile2.jpg'
-import bgMobile3 from '../assets/images/bg-mobile3.jpg'
-import bgMobile4 from '../assets/images/bg-mobile4.jpg'
+import bgMobile1 from '../assets/images/bg-mobile1a.jpg'
+import bgMobile2 from '../assets/images/bg-mobile2a.jpg'
+import bgMobile3 from '../assets/images/bg-mobile3a.jpg'
+import bgMobile4 from '../assets/images/bg-mobile4a.jpg'
 
 const router = useRouter()
 const { login } = useAuth()
