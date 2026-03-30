@@ -2,18 +2,18 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const expenses = [
-  { category: 'Dining', amount: '$420', budget: '$300', pct: 78, over: true },
-  { category: 'Transportation', amount: '$180', budget: '$200', pct: 55, over: false },
-  { category: 'Subscriptions', amount: '$95', budget: '$100', pct: 30, over: false },
-  { category: 'Shopping', amount: '$340', budget: '$250', pct: 92, over: true },
-  { category: 'Entertainment', amount: '$120', budget: '$150', pct: 38, over: false },
+  { category: 'Dining', amount: '$1,840', budget: '$1,200', pct: 100, over: true },
+  { category: 'Transportation', amount: '$980', budget: '$1,000', pct: 72, over: false },
+  { category: 'Subscriptions', amount: '$420', budget: '$500', pct: 52, over: false },
+  { category: 'Shopping', amount: '$2,360', budget: '$1,800', pct: 100, over: true },
+  { category: 'Entertainment', amount: '$1,100', budget: '$1,500', pct: 65, over: false },
 ]
 
 // AI Tips slideshow — 3 tips cycling every 5 seconds
 const aiTips = [
-  'Your Dining spend is $120 over budget this month. Try setting a weekly cap of $75 to get back on track — small restaurant swaps can save $400+ over a season.',
-  'Shopping is nearly at its limit ($340/$250 budget). Before your next non-essential purchase, wait 48 hours — studies show this reduces impulse buys by up to 60%.',
-  'You have 3+ active subscriptions. Audit them this week: canceling even one unused service could free up $100–$200/year to redirect into your Roth IRA.',
+  'Your Dining spend is $640 over budget this month. Try setting a weekly cap of $300 to get back on track — small restaurant swaps can save $2,000+ over a season.',
+  'Shopping is $560 over budget ($2,360/$1,800). Before your next non-essential purchase, wait 48 hours — studies show this reduces impulse buys by up to 60%.',
+  'You have 3+ active subscriptions totaling $420/mo. Audit them this week: cutting unused services could free up $1,000+/year to redirect into your investments.',
 ]
 const currentTip = ref(0)
 let _tipTimer = null
@@ -37,8 +37,8 @@ onUnmounted(() => {
 
       <div class="bg-gradient-to-br from-rose-500 to-pink-700 rounded-2xl p-6 mb-6 text-white">
         <p class="text-sm text-white/70 mb-1">Total Spent This Month</p>
-        <p class="text-4xl font-bold">$1,155</p>
-        <p class="text-sm text-rose-200 mt-2">Budget: $1,000 · ▲ $155 over</p>
+        <p class="text-4xl font-bold">$6,700</p>
+        <p class="text-sm text-rose-200 mt-2">Budget: $6,000 · ▲ $700 over</p>
       </div>
 
       <!-- AI Tips Slideshow (3 tips, 5s cycle) -->

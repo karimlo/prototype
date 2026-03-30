@@ -1,9 +1,9 @@
 <script setup>
 const holdings = [
-  { name: 'S&P 500 Index Fund', ticker: 'VOO', value: '$8,420.00', gain: '+12.4%', positive: true },
-  { name: 'Total Market ETF', ticker: 'VTI', value: '$4,210.50', gain: '+9.8%', positive: true },
-  { name: 'Apple Inc.', ticker: 'AAPL', value: '$1,840.00', gain: '+4.2%', positive: true },
-  { name: 'Tesla Inc.', ticker: 'TSLA', value: '$620.00', gain: '-8.1%', positive: false },
+  { name: 'S&P 500 Index Fund', ticker: 'VOO', value: '$64,800.00', gain: '+22.4%', positive: true },
+  { name: 'Total Market ETF', ticker: 'VTI', value: '$38,450.00', gain: '+18.6%', positive: true },
+  { name: 'Apple Inc.', ticker: 'AAPL', value: '$21,300.00', gain: '+31.7%', positive: true },
+  { name: 'Tesla Inc.', ticker: 'TSLA', value: '$8,940.00', gain: '-6.3%', positive: false },
 ]
 </script>
 
@@ -15,8 +15,8 @@ const holdings = [
 
       <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-6 mb-6 text-white">
         <p class="text-sm text-white/70 mb-1">Portfolio Value</p>
-        <p class="text-4xl font-bold">$15,090.50</p>
-        <p class="text-sm text-emerald-200 mt-2">▲ +$1,248.40 (9.0%) all time</p>
+        <p class="text-4xl font-bold">$133,490.00</p>
+        <p class="text-sm text-emerald-200 mt-2">▲ +$28,640.00 (27.3%) all time</p>
       </div>
 
       <!-- AI Tip -->

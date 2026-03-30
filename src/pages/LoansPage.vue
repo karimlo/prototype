@@ -1,7 +1,7 @@
 <script setup>
 const loans = [
-  { name: 'Student Loan', lender: 'Federal', balance: '$24,800', rate: '4.99% APR', monthly: '$260/mo', progress: 38 },
-  { name: 'Auto Loan', lender: 'Toyota Financial', balance: '$12,400', rate: '6.5% APR', monthly: '$280/mo', progress: 52 },
+  { name: 'Student Loan', lender: 'Federal', balance: '$52,400', rate: '4.99% APR', monthly: '$680/mo', progress: 22 },
+  { name: 'Auto Loan', lender: 'Toyota Financial', balance: '$28,600', rate: '6.5% APR', monthly: '$540/mo', progress: 35 },
 ]
 </script>
 
@@ -13,15 +13,15 @@ const loans = [
 
       <div class="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl p-6 mb-6 text-white">
         <p class="text-sm text-white/70 mb-1">Total Loan Balance</p>
-        <p class="text-4xl font-bold">$37,200</p>
-        <p class="text-sm text-slate-400 mt-2">$540/month total payments</p>
+        <p class="text-4xl font-bold">$81,000</p>
+        <p class="text-sm text-slate-400 mt-2">$1,220/month total payments</p>
       </div>
 
       <!-- AI Tip -->
       <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/50 rounded-2xl p-4 mb-6 flex gap-3">
         <span class="text-xl">💡</span>
         <p class="text-sm text-indigo-700 dark:text-indigo-300 leading-relaxed">
-          <strong>SCOUT AI Tip:</strong> Adding just $50/month extra to your auto loan could save you ~$480 in interest and shave 6 months off your payoff date. Start with your highest-rate loan first.
+          <strong>SCOUT AI Tip:</strong> Adding $200/month extra to your auto loan (6.5% APR) could save you ~$3,800 in interest and cut 14 months off your payoff. Always attack the highest-rate balance first.
         </p>
       </div>
 

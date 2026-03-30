@@ -1,9 +1,9 @@
 <script setup>
 const accounts = [
-  { name: 'Chase Checking', balance: '$4,820.50', type: 'Checking', change: '+$3,500 today', positive: true },
-  { name: 'Chase Savings', balance: '$6,814.00', type: 'Savings', change: '+$200 this week', positive: true },
-  { name: 'Ally HYSA', balance: '$12,440.00', type: 'High-Yield Savings', change: '+$48.20 interest', positive: true },
-  { name: 'Direct Deposit', balance: '$3,500.00', type: 'NIL Income', change: 'Received today', positive: true },
+  { name: 'Chase Checking', balance: '$18,340.75', type: 'Checking', change: '+$12,500 today', positive: true },
+  { name: 'Chase Savings', balance: '$34,200.00', type: 'Savings', change: '+$1,400 this week', positive: true },
+  { name: 'Ally HYSA', balance: '$52,860.00', type: 'High-Yield Savings', change: '+$218.40 interest', positive: true },
+  { name: 'Direct Deposit', balance: '$24,500.00', type: 'NIL Income', change: 'Received today', positive: true },
 ]
 </script>
 
@@ -16,7 +16,7 @@ const accounts = [
       <!-- Summary -->
       <div class="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-6 mb-6 text-white">
         <p class="text-sm text-white/70 mb-1">Total Balance</p>
-        <p class="text-4xl font-bold">$27,574.50</p>
+        <p class="text-4xl font-bold">$129,900.75</p>
         <p class="text-sm text-white/60 mt-2">Across 4 accounts · Updated just now</p>
       </div>
 
