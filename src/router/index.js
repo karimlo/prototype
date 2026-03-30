@@ -7,6 +7,8 @@ import ExpensesPage from '../pages/ExpensesPage.vue'
 import LoansPage from '../pages/LoansPage.vue'
 import CreditCardsPage from '../pages/CreditCardsPage.vue'
 import RetirementPage from '../pages/RetirementPage.vue'
+import MorePage from '../pages/MorePage.vue'
+import SettingsPage from '../pages/SettingsPage.vue'
 
 const routes = [
   { path: '/login', component: LoginPage, meta: { public: true } },
@@ -18,6 +20,8 @@ const routes = [
   { path: '/loans', component: LoansPage },
   { path: '/credit-cards', component: CreditCardsPage },
   { path: '/retirement', component: RetirementPage },
+  { path: '/more', component: MorePage },
+  { path: '/settings', component: SettingsPage },
 ]
 
 const router = createRouter({

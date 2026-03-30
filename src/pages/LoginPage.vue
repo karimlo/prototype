@@ -5,9 +5,10 @@ import { useAuth } from '../composables/useAuth.js'
 import { useTheme } from '../composables/useTheme.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
 import logoBlack from '../assets/images/scountlogo-black.svg'
-import bgSlide1 from '../assets/images/bp-desktop1.png'
-import bgSlide2 from '../assets/images/bp-desktop2.jpg'
-import bgSlide3 from '../assets/images/bp-desktop3.jpg'
+import bgSlide1 from '../assets/images/banner-1a.jpg'
+import bgSlide2 from '../assets/images/banner-2a.jpg'
+import bgSlide3 from '../assets/images/banner-3a.jpg'
+import bgSlide4 from '../assets/images/banner-4a.jpg'
 import bgMobile1 from '../assets/images/bg-mobile1a.jpg'
 import bgMobile2 from '../assets/images/bg-mobile2a.jpg'
 import bgMobile3 from '../assets/images/bg-mobile3a.jpg'
@@ -23,7 +24,7 @@ const error = ref('')
 const loading = ref(false)
 
 // Slideshows — desktop (3 images) and mobile (4 images), same index drives both
-const desktopSlides = [bgSlide1, bgSlide2, bgSlide3]
+const desktopSlides = [bgSlide1, bgSlide2, bgSlide3, bgSlide4]
 const mobileSlides  = [bgMobile1, bgMobile2, bgMobile3, bgMobile4]
 const currentSlide  = ref(0)
 
