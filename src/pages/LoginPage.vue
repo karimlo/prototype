@@ -34,6 +34,17 @@ let _mqHandler = null
 let _slideTimer = null
 
 onMounted(() => {
+  // Reset any stale iOS Safari viewport zoom when the login page loads.
+  // Toggling maximum-scale=1 forces the browser to re-apply initial-scale=1,
+  // then we restore it after a tick so pinch-zoom stays accessible.
+  const metaViewport = document.querySelector('meta[name=viewport]')
+  if (metaViewport) {
+    metaViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover'
+    setTimeout(() => {
+      metaViewport.content = 'width=device-width, initial-scale=1.0, viewport-fit=cover'
+    }, 100)
+  }
+
   _mq = window.matchMedia('(min-width: 768px)')
   isDesktop.value = _mq.matches
   _mqHandler = (e) => { isDesktop.value = e.matches }
