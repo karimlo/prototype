@@ -103,7 +103,7 @@ const categories = [
             <div class="flex items-center gap-3">
               <span v-html="cat.icon" class="text-gray-900 dark:text-amber-400" />
               <div>
-                <p class="font-medium text-base leading-tight uppercase tracking-widest text-gray-900 dark:text-amber-400">{{ cat.label }}</p>
+                <p class="font-heading font-bold text-base leading-tight text-gray-900 dark:text-amber-400">{{ cat.label }}</p>
                 <p class="text-xs mt-0.5" :class="cat.subtitleClass">{{ cat.subtitle }}</p>
               </div>
             </div>
