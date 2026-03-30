@@ -114,7 +114,7 @@ async function handleLogin() {
 .login-bg {
   background-image: v-bind("'url(' + bgMobile + ')'");
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
 }
 
