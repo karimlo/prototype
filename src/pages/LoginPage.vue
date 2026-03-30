@@ -29,11 +29,11 @@ async function handleLogin() {
 
 <template>
   <div
-    class="min-h-screen flex items-center justify-center px-4 relative"
-    :style="`background-image: url(${bgImage}); background-size: cover; background-position: center;`"
+    class="min-h-screen flex items-center justify-center px-5 relative"
+    :style="`background-image: url(${bgImage}); background-size: cover; background-position: center; background-repeat: no-repeat;`"
   >
-    <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+    <!-- Dark overlay — no blur so the image stays crisp -->
+    <div class="absolute inset-0 bg-black/45" />
 
     <!-- Card -->
     <div class="relative z-10 w-full max-w-sm">
@@ -42,7 +42,7 @@ async function handleLogin() {
         <img :src="logoWhite" alt="SCOUT" class="h-10 w-auto" />
       </div>
 
-      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-2xl">
+      <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl px-6 py-8 shadow-2xl">
         <h1 class="text-2xl font-bold text-white text-center mb-1">Welcome back</h1>
         <p class="text-sm text-white/60 text-center mb-8">Sign in to your SCOUT account</p>
 
@@ -55,7 +55,7 @@ async function handleLogin() {
               type="email"
               placeholder="athlete@university.edu"
               autocomplete="email"
-              class="w-full px-4 py-3 rounded-xl text-sm
+              class="w-full px-4 py-3.5 rounded-xl text-sm
                 bg-white/10 border border-white/20 text-white placeholder-white/30
                 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40
                 transition-all duration-200"
@@ -70,7 +70,7 @@ async function handleLogin() {
               type="password"
               placeholder="••••••••"
               autocomplete="current-password"
-              class="w-full px-4 py-3 rounded-xl text-sm
+              class="w-full px-4 py-3.5 rounded-xl text-sm
                 bg-white/10 border border-white/20 text-white placeholder-white/30
                 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/40
                 transition-all duration-200"
@@ -91,7 +91,7 @@ async function handleLogin() {
           <button
             type="submit"
             :disabled="loading"
-            class="w-full py-3 rounded-xl font-semibold text-sm
+            class="w-full py-4 rounded-xl font-semibold text-sm
               bg-white text-gray-900
               hover:bg-white/90 active:scale-[0.98]
               disabled:opacity-60 disabled:cursor-not-allowed

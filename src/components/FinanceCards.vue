@@ -67,7 +67,7 @@ const colorMap = {
 </script>
 
 <template>
-  <section class="px-4 md:px-8 py-8">
+  <section class="px-5 md:px-8 py-8">
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-between mb-6">
         <div>
@@ -83,7 +83,7 @@ const colorMap = {
         <div
           v-for="(card, i) in cards"
           :key="i"
-          class="group bg-white dark:bg-gray-900 rounded-2xl border p-5 shadow-sm
+          class="group bg-white dark:bg-gray-900 rounded-2xl border p-6 shadow-sm
             hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
           :class="colorMap[card.color].border"
         >
@@ -101,9 +101,13 @@ const colorMap = {
             </div>
           </div>
           <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">{{ card.body }}</p>
-          <button class="text-xs font-semibold text-indigo-600 dark:text-indigo-400
-            hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors duration-200
-            flex items-center gap-1 group-hover:gap-2">
+          <button class="inline-flex items-center gap-1.5 group-hover:gap-2.5
+            text-xs font-semibold text-indigo-600 dark:text-indigo-400
+            hover:text-indigo-700 dark:hover:text-indigo-300
+            px-3 py-1.5 rounded-lg
+            bg-indigo-50 dark:bg-indigo-900/20
+            hover:bg-indigo-100 dark:hover:bg-indigo-900/40
+            transition-all duration-200">
             {{ card.action }}
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

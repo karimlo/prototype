@@ -37,13 +37,13 @@ const navLinks = [
     bg-white/95 dark:bg-gray-950/95 backdrop-blur-md
     border-t border-gray-200 dark:border-gray-800
     transition-colors duration-300">
-    <div class="flex items-stretch h-16">
+    <div class="flex items-stretch h-[4.25rem]">
       <!-- Nav links -->
       <router-link
         v-for="link in navLinks"
         :key="link.to"
         :to="link.to"
-        class="flex-1 flex flex-col items-center justify-center gap-0.5 relative
+        class="flex-1 flex flex-col items-center justify-center gap-1 px-1 relative
           text-gray-400 dark:text-gray-500
           transition-all duration-300
           [&.router-link-active]:text-indigo-600 dark:[&.router-link-active]:text-indigo-400"
@@ -64,7 +64,7 @@ const navLinks = [
       <!-- AI Assistant button -->
       <button
         @click="emit('open-chat')"
-        class="flex-1 flex flex-col items-center justify-center gap-0.5
+        class="flex-1 flex flex-col items-center justify-center gap-1 px-1
           text-gray-400 dark:text-gray-500
           hover:text-indigo-600 dark:hover:text-indigo-400
           transition-all duration-300"
