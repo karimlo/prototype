@@ -53,10 +53,10 @@ const cards = [
           <div class="flex items-center gap-3 mb-4">
             <!-- Monochrome thin-line icon -->
             <div class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center
-              bg-amber-400/10 dark:bg-amber-400/[0.08]
-              border border-amber-400/20 dark:border-amber-400/15">
+              bg-amber-400/20 dark:bg-amber-400/[0.08]
+              border border-amber-400/30 dark:border-amber-400/15">
               <svg xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 text-amber-600 dark:text-amber-400"
+                class="w-5 h-5 text-scout dark:text-amber-400"
                 fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" :d="icons[card.icon]" />
@@ -65,8 +65,9 @@ const cards = [
             <!-- Badge -->
             <span class="text-[10px] font-semibold tracking-wide uppercase
               px-2.5 py-1 rounded-full
-              bg-scout/10 text-scout
-              border border-scout/20">
+              bg-amber-400/20 dark:bg-scout/10
+              text-amber-700 dark:text-scout
+              border border-amber-400/30 dark:border-scout/20">
               {{ card.badge }}
             </span>
           </div>
@@ -81,13 +82,13 @@ const cards = [
             {{ card.body }}
           </p>
 
-          <!-- Action button — proper padding so text never touches border -->
+          <!-- Action button -->
           <button class="self-start inline-flex items-center gap-2
             text-xs font-semibold
-            text-scout
-            bg-scout/10
-            border border-scout/20
-            hover:bg-scout/20
+            text-gray-500 dark:text-scout
+            bg-gray-100 dark:bg-scout/10
+            border border-gray-200 dark:border-scout/20
+            hover:bg-gray-200 dark:hover:bg-scout/20
             px-4 py-2 rounded-lg
             transition-all duration-200
             group-hover:gap-3">
