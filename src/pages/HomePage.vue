@@ -5,7 +5,10 @@ import FinanceCards from '../components/FinanceCards.vue'
 
 <template>
   <div class="bg-gray-50 dark:bg-gray-950 min-h-screen transition-colors duration-300">
-    <HeroSlider />
+    <!-- Hero slider: hidden on mobile to give more room to cards and AI chat -->
+    <div class="hidden md:block">
+      <HeroSlider />
+    </div>
     <FinanceCards />
   </div>
 </template>
