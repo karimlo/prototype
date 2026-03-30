@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import banner1 from '../assets/images/banner-1.jpg'
-import banner2 from '../assets/images/banner-2.jpg'
-import banner3 from '../assets/images/banner-3.jpg'
-import banner4 from '../assets/images/banner-4.jpg'
+import banner1 from '../assets/images/banner-1a.jpg'
+import banner2 from '../assets/images/banner-2a.jpg'
+import banner3 from '../assets/images/banner-3a.jpg'
+import banner4 from '../assets/images/banner-4a.jpg'
 
 const slides = [
   {
