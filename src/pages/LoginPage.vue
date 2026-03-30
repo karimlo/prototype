@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth.js'
 import logoWhite from '../assets/images/scountlogo-white.svg'
 import bgMobile from '../assets/images/bg-2.jpg'
-import bgDesktop from '../assets/images/bg-1.jpg'
+import bgDesktop from '../assets/images/bp-desktop1.png'
 
 const router = useRouter()
 const { login } = useAuth()
