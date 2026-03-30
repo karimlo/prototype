@@ -17,6 +17,17 @@ const cards = [
         <p class="text-sm text-purple-200 mt-2">13% average utilization · Great score impact</p>
       </div>
 
+      <!-- Promotional AI Tip -->
+      <div class="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-700/50 rounded-2xl p-4 mb-6 flex gap-3">
+        <span class="text-xl">🎉</span>
+        <div class="flex-1">
+          <p class="text-sm font-semibold text-amber-800 dark:text-amber-300 mb-1">SCOUT AI — Exclusive Offer</p>
+          <p class="text-sm text-amber-700 dark:text-amber-400 leading-relaxed">
+            You may qualify for the <strong>SCOUT Student Rewards Card</strong> — <strong>0% APR</strong> for 15 months, <strong>no annual fee</strong>, and 3× points on dining &amp; travel. Perfect for athletes building credit early. Earn a <strong>10,000-point welcome bonus</strong> after your first purchase.
+          </p>
+        </div>
+      </div>
+
       <div class="space-y-4">
         <div v-for="card in cards" :key="card.last4"
           class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5

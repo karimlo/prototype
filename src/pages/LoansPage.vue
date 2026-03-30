@@ -17,6 +17,14 @@ const loans = [
         <p class="text-sm text-slate-400 mt-2">$540/month total payments</p>
       </div>
 
+      <!-- AI Tip -->
+      <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/50 rounded-2xl p-4 mb-6 flex gap-3">
+        <span class="text-xl">💡</span>
+        <p class="text-sm text-indigo-700 dark:text-indigo-300 leading-relaxed">
+          <strong>SCOUT AI Tip:</strong> Adding just $50/month extra to your auto loan could save you ~$480 in interest and shave 6 months off your payoff date. Start with your highest-rate loan first.
+        </p>
+      </div>
+
       <div class="space-y-4">
         <div v-for="loan in loans" :key="loan.name"
           class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5

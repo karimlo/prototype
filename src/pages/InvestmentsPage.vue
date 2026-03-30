@@ -19,6 +19,14 @@ const holdings = [
         <p class="text-sm text-emerald-200 mt-2">▲ +$1,248.40 (9.0%) all time</p>
       </div>
 
+      <!-- AI Tip -->
+      <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/50 rounded-2xl p-4 mb-6 flex gap-3">
+        <span class="text-xl">💡</span>
+        <p class="text-sm text-indigo-700 dark:text-indigo-300 leading-relaxed">
+          <strong>SCOUT AI Tip:</strong> Your TSLA position is down 8.1%. Consider rebalancing into VOO — index funds historically outperform individual stocks for long-term wealth building, especially early in your career.
+        </p>
+      </div>
+
       <div class="space-y-3">
         <div v-for="h in holdings" :key="h.ticker"
           class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5

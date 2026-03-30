@@ -20,6 +20,14 @@ const accounts = [
         <p class="text-sm text-white/60 mt-2">Across 4 accounts · Updated just now</p>
       </div>
 
+      <!-- AI Tip -->
+      <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/50 rounded-2xl p-4 mb-6 flex gap-3">
+        <span class="text-xl">💡</span>
+        <p class="text-sm text-indigo-700 dark:text-indigo-300 leading-relaxed">
+          <strong>SCOUT AI Tip:</strong> Your Ally HYSA is earning a competitive rate — consider auto-transferring 10% of each NIL deposit to keep growing your emergency fund passively.
+        </p>
+      </div>
+
       <div class="space-y-3">
         <div v-for="acc in accounts" :key="acc.name"
           class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-5
