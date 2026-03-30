@@ -31,7 +31,7 @@ async function handleLogin() {
 <template>
   <div class="login-bg min-h-screen flex items-center justify-center px-5 relative">
     <!-- Dark overlay — no blur so the image stays crisp -->
-    <div class="absolute inset-0 bg-black/45" />
+    <div class="absolute inset-0 bg-black/30" />
 
     <!-- Card -->
     <div class="relative z-10 w-full max-w-sm">
