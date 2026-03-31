@@ -43,7 +43,9 @@ const navLinks = [
         v-for="link in navLinks"
         :key="link.to"
         :to="link.to"
-        class="text-sm font-medium text-gray-600 dark:text-gray-400
+        class="text-xs font-bold uppercase tracking-wider
+          font-nav
+          text-gray-600 dark:text-gray-400
           hover:text-gray-900 dark:hover:text-white
           transition-colors duration-200
           [&.router-link-active]:text-scout"

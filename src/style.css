@@ -9,12 +9,14 @@
 @import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/inter/600.css';
+@import '@fontsource/montserrat/700.css';
 @import 'tailwindcss';
 
 @theme {
   --color-scout: oklch(0.69 0.08 95.87);
   --font-heading: 'Poppins', 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-nav: 'Montserrat', system-ui, sans-serif;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
